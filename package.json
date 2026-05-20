@@ -1,0 +1,22 @@
+{
+  "name": "prprocess-testcase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:prprocess": "npx playwright test --project=chromium",
+    "test:vib": "npx playwright test --project=chromium",
+    "upload:results": "bash script/upload_file_result.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "xlsx": "^0.18.5"
+  }
+}
