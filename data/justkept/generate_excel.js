@@ -1,135 +1,7 @@
 const path = require('path');
 const { generateExcel } = require('../../test/utils/excelGenerator');
 
-const outputFile = path.join(__dirname, `test_cases_06_req_report_no_file.xlsx`);
-
-const data = {
-  // TC11_Login_From_Spec
-  'Login_From_Spec': [
-
-    // Login
-    { Action: 'GOTO', Target: '/login', Data: '' },
-    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    { Action: 'FILL_ROLE', Target: 'textbox|username', Data: '${username}' },
-    { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    { Action: 'FILL_ROLE', Target: 'textbox|pwd', Data: '${password}' },
-    { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    { Action: 'CLICK_TEXT_ROLE', Target: 'button|Sign In', Data: 'force' },
-
-    // Document Sending Schedule
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_sending_schedule', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_search_by_subject', Data: 'bcd' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_search_by_subject', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_status', Data: 'Pending' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_status', Data: 'In Progress' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_date', Data: '29-Apr-2026' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_date', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-
-    // Upload Document
-    // { Action: 'CLICK_ID', Target: 'btn_upload_document', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_search_by_requestor', Data: 'วิภา พึ่งสมัคร' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_search_by_requestor', Data: 'พึ่งสมัคร วิภา' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_search_by_requestor', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_status', Data: 'Pending' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_status', Data: 'Completed' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_status', Data: 'Pending' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_date', Data: '29-Apr-2026' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_date', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_filter_status', Data: 'All Statuses' },
-
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'WAIT_SELECTOR', Target: 'tr:has-text("stitch Sukjai") >> #btn_fulfill_0', Data: '' },
-    // { Action: 'CLICK_LOCATOR', Target: 'tr:has-text("stitch Sukjai") >> #btn_fulfill_0', Data: '' },
-
-    // Fullfill Form
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_subject_line', Data: 'Summary Statement' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_email_template', Data: 'Monthly Statement Available' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_email_template', Data: 'Custom (Blank Canvas)' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_message_body', Data: '...' },
-
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'UPLOAD_LOCATOR', Target: '#input_file', Data: '${file}' },
-
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_save_draft', Data: '' },
-
-    // { Action: 'WAIT_TIME', Target: '5000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_submit', Data: '' },
-
-    // { Action: 'WAIT_TIME', Target: '5000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_upload_document', Data: '' },
-
-    // btn_customer_report
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_customer_report', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_id_number', Data: '123' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_search', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_id_number', Data: '110' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_search', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_id_number', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_search', Data: '' },
-
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'WAIT_SELECTOR', Target: 'tr:has-text("1100354215785") >> #btn_view_log_0', Data: '' },
-    // { Action: 'CLICK_LOCATOR', Target: 'tr:has-text("1100354215785") >> #btn_view_log_0', Data: '' },
-
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_customer_report', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'WAIT_SELECTOR', Target: 'tr:has-text("1100354215785") >> #btn_view_as_0', Data: '' },
-    // { Action: 'CLICK_LOCATOR', Target: 'tr:has-text("1100354215785") >> #btn_view_as_0', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '3000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_return_to_admin', Data: '' },
-
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_admin_settings', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '1000', Data: '' },
-    // { Action: 'CLICK_ID', Target: 'btn_logout', Data: '' },
-
-    // As request report
-    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    { Action: 'CLICK_ID', Target: 'btn_as_request', Data: '' },
-    { Action: 'CLICK_LOCATOR', Target: '[aria-label="View รายการที่ต้องปรับ ID - Broker.pdf"]', Data: '' },
-
-    { Action: 'WAIT_TIME', Target: '5000', Data: '' },
-
-    { Action: 'SCREENSHOT', Target: 'test-results/justkept/tc03_received_file_${username}_${description}.png', Data: 'full' },
-    { Action: 'CHECK_RESULT', Target: '${check_result}', Data: '${result}' },
-  ],
-  'Login_From_Spec_Data': [
-    // { username: 'user1@mail.com', password: '1', check_result: 'url|/admin/dashboard', result: 'pass', description: 'valid_password' },
-    // { username: 'user1@mail.com', password: '123', check_result: 'url|/login', result: 'pass', description: 'invalid_password' },
-    { username: 'user2@mail.com', password: '1', check_result: 'url|/reports', result: 'pass', description: 'Customer_received_file' },
-    // { username: 'user2@mail.com', password: '123', check_result: 'url|/login', result: 'pass', description: 'invalid_password' },
-    // { username: 'user1@mail.com', password: '1', check_result: 'url|/admin/uploads', result: 'pass', description: 'Broker_Fullfill', file: 'data/justkept/รายการที่ต้องปรับ ID - Broker.pdf' },
-  ],
-};
+const outputFile = path.join(__dirname, `tc_06_customer_req_report_no_file.xlsx`);
 
 const tc_01_self_login = {
   'Self_login': [
@@ -150,9 +22,9 @@ const tc_01_self_login = {
   ],
   'Self_login_Data': [
     { username: 'user1@mail.com', password: '1', check_result: 'url|/admin/dashboard', result: 'pass', description: 'valid_password' },
-    { username: 'user1@mail.com', password: '123', check_result: 'url|/login', result: 'pass', description: 'invalid_password' },
+    { username: 'user1@mail.com', password: '123', check_result: 'url|/customer-login', result: 'pass', description: 'invalid_password' },
     { username: 'user2@mail.com', password: '1', check_result: 'url|/reports', result: 'pass', description: 'valid_password' },
-    { username: 'user2@mail.com', password: '123', check_result: 'url|/login', result: 'pass', description: 'invalid_password' },
+    { username: 'user2@mail.com', password: '123', check_result: 'url|/customer-login', result: 'pass', description: 'invalid_password' },
   ],
 };
 
@@ -281,8 +153,10 @@ const tc_04_broker_customer_report = {
 
     { Action: 'CLICK_ID', Target: 'btn_customer_report', Data: '' },
     { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    // { Action: 'FILL_ROLE', Target: 'textbox|input_id_number', Data: '' },
-    // { Action: 'WAIT_TIME', Target: '2000', Data: '' },
+    { Action: 'FILL_ROLE', Target: 'textbox|input_id_number', Data: '1100100123456' },
+    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
+    { Action: 'CLICK_ID', Target: 'btn_search', Data: '' },
+    { Action: 'WAIT_TIME', Target: '1000', Data: '' },
 
     { Action: 'WAIT_SELECTOR', Target: 'tr:has-text("วิภา พึ่งสมัคร")', Data: '' },
     { Action: 'CLICK_LOCATOR', Target: 'tr:has-text("วิภา พึ่งสมัคร") >> button:has-text("Log")', Data: '' },
@@ -433,16 +307,6 @@ const tc_06_customer_req_report_no_file = {
     { Action: 'WAIT_TIME', Target: '2000', Data: '' },
     { Action: 'CLICK_ID', Target: 'btn_as_request_report', Data: '' },
     { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    { Action: 'FILL_ROLE', Target: 'textbox|input_year', Data: '2024' },
-    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    { Action: 'FILL_ROLE', Target: 'textbox|input_date_start', Data: '01-May-2024' },
-    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    { Action: 'FILL_ROLE', Target: 'textbox|input_date_end', Data: '01-May-2024' },
-    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    { Action: 'FILL_ROLE', Target: 'textbox|input_detail', Data: 'This is Case for export no file' },
-    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
-    { Action: 'UPLOAD_LOCATOR', Target: '#input_requiredFiles', Data: '${file}' },
-    { Action: 'WAIT_TIME', Target: '2000', Data: '' },
     { Action: 'CLICK_ID', Target: 'btn_submit', Data: '' },
     { Action: 'WAIT_TIME', Target: '6000', Data: '' },
     { Action: 'CHECK_RESULT', Target: 'text|กำลังดำเนินการ', Data: 'pass' },
@@ -513,5 +377,5 @@ const tc_06_customer_req_report_other_form = {
   ],
 };
 
-generateExcel(tc_01_self_login, outputFile);
+generateExcel(tc_06_customer_req_report_no_file, outputFile);
 
