@@ -72,22 +72,20 @@ npx playwright test test/prprocess/spec/
 เป็นคำสั่งมาตรฐานของ Playwright ที่ใช้ได้กับทุกเว็บโปรเจกต์ เน้นการสั่งงานผ่าน Role หรือ Text ทั่วไป
 
 | Action | Target | Data | Description |
-| :--- | :--- | :--- | :--- |
-| `GOTO` | `URL` | - | ไปยัง URL ที่ระบุ |
-| `FILL_ROLE` | `label`, `id` หรือ `role\|name` | `value` | กรอกข้อมูลใน Input (รองรับการรอ, Scroll และหาด้วย ID/Label/Semantic อัตโนมัติ) |
-| `CLICK_ROLE` | `label`, `id` หรือ `role\|name` | - | คลิกที่ Element (รองรับการหาด้วย ID/Label/Role/Semantic อัตโนมัติ) |
+| :---   | :---   | :--- | :--- |
+| `GOTO` | `URL`  | -    | ไปยัง URL ที่ระบุ |
+| `FILL_ROLE` | `label` หรือ `role\|name` | `value` | กรอกข้อมูลใน Input (รองรับการรอและการ Scroll อัตโนมัติ) |
+| `CLICK_ROLE` | `label` หรือ `role\|name` | - | คลิกที่ Button, Link หรือ Element ตาม Role |
 | `WAIT_TIME` | `ms` | - | รอเวลาตามที่ระบุ (มิลลิวินาที) |
 | `FILL_LOCATOR` | `selector` | `value` | กรอกข้อมูลโดยใช้ CSS/XPath selector (รองรับการรอและการ Scroll อัตโนมัติ) |
-| `CLICK_TEXT_ROLE` | `label`, `id` หรือ `role\|name` | - | คลิกที่ Element แบบตรงตัว (รองรับการหาด้วย Exact Text หรือ ID/Semantic) |
-| `CLICK_ID` | `id` | `force` (optional) | คลิกที่ Element โดยใช้ HTML ID หรือ Flutter Semantic ID |
-| `FILL_ID` | `id` | `value` | กรอกข้อมูลใน Element โดยใช้ HTML ID หรือ Flutter Semantic ID |
-| `CHECK_RESULT` | `mode\|selector` | `pass` หรือ `fail` | ตรวจสอบผลลัพธ์ (รองรับ id, text, url, etc.) |
+| `CLICK_TEXT_ROLE` | `label` หรือ `role\|name` | - | คลิกที่ Element โดยระบุ Role และ Text แบบตรงตัว (Exact Match) |
+| `CHECK_RESULT` | `mode\|selector` | `pass` หรือ `fail` | ตรวจสอบผลลัพธ์ (ดูรายละเอียดด้านล่าง) |
 
 > [!TIP]
 > **CHECK_RESULT** รองรับหลายโหมด เช่น:
 > - `text|สำเร็จ` (เช็คข้อความบนหน้า)
 > - `url|/dashboard` (เช็ค URL หลัง Redirect)
-> - `id|element_id` (เช็ค HTML ID หรือ Flutter Semantic ID)
+> - `id|element_id` (เช็ค Flutter ID)
 > - `role|button,ตกลง` (เช็ค Role และชื่อ)
 
 ### 2. Project Keywords (`projectKeywords.js`)
@@ -96,11 +94,11 @@ npx playwright test test/prprocess/spec/
 | Action | Target | Data | Description |
 | :--- | :--- | :--- | :--- |
 | `LOGIN` | - | - | ทำการ Login เข้าสู่ระบบ (ใช้ ADMIN_USER/PASS จาก .env) |
-| `CLICK_FLT` | `id` | `force` (optional) | คลิก Element โดยใช้ HTML ID หรือ Flutter Semantic ID |
-| `SELECT_FLT` | `id` | `label` | เลือกค่าจาก Dropdown โดยใช้ ID (HTML/Flutter) |
+| `CLICK_FLT` | `semantics-id` | `force` (optional) | คลิก Element ของ Flutter โดยใช้ ID |
+| `SELECT_FLT` | `semantics-id` | `label` | เลือกค่าจาก Dropdown ของ Flutter |
 | `PICK_DATETIME` | `button-label` | `date\|HH:mm` | เลือกวันที่และเวลาจาก Picker (เช่น `15\|10:30`) |
 | `BYPASS_TURNSTILE` | - | - | คลิกผ่าน Cloudflare Turnstile (Captcha) อัตโนมัติ |
-| `SCROLL_TO_FLT` | `id` | - | เลื่อนหน้าจอไปที่ Element โดยใช้ ID (HTML/Flutter) |
+| `SCROLL_TO_FLT` | `semantics-id` | - | เลื่อนหน้าจอไปที่ Element ของ Flutter |
 
 ---
 

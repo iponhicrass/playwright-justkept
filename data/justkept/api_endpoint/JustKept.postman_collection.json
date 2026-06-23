@@ -1,0 +1,818 @@
+{
+  "info": {
+    "_postman_id": "40faa4be-25b5-4f4d-b454-84b49dc14795",
+    "name": "JustKept",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19179410"
+  },
+  "item": [
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "Request",
+          "item": [
+            {
+              "name": "createcustomerrequest",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    // \"PK\": \"CUSTOMER#9876543210987\",\r\n    \"specifyDocType\": \"Stitch Good new Row\",\r\n    \"requestTopic\": \"Stitch Good new Row\",\r\n    // \"SK\": \"REQ#2026-03-11T10:00:00Z\",\t//REQ#System stamptime\r\n    // \"entity\": \"customer_req\",\t//defult : customer_req\r\n    // \"requestId\": \"REQ001\",\t//auto gen uuid\r\n    // \"docId\": \"DOC001\",\t//auto gen uuid\r\n    \"customerId\": \"9876543210987\",\r\n    \"customerName\": \"stitch Sukjai\",\r\n    \"customerEmail\": \"stitch@example.com\",\r\n    // \"requestType\": \"File Exists\",\t//defult : File Exists\r\n    // \"status\": \"Completed\"\t//defult : Completed\r\n    // \"createdAt\": \"2026-03-11T10:00:00Z\"\t// System stamptime\r\n\r\n    \"brokerId\": \"U1001\", // ไม่ใมช้เเล้วไปใช้ subCompanyId แทน\r\n    \"subCompanyId\":\"BKK01\",\r\n    \"filter\": {\r\n        \"year\": \"2026\",\r\n        \"startDate\": \"\",\r\n        \"endDate\": \"\"\r\n    }, //optional (convert to dynamic)  // New Req\r\n    \"fileNonRequiredPath\": [ // New Req\r\n        // \"document/customers/9876543210987/uploaded/nonRequiredFile.pdf\"\r\n    ],\r\n    \"fileRequiredPath\": [ // New Req\r\n        // \"document/customers/9876543210987/uploaded/requiredFile.pdf\",\r\n        // \"document/customers/9876543210987/uploaded/cardId_Wipa.pdf\",\r\n        // \"document/customers/9876543210987/uploaded/house_registration_Wipa.pdf\"\r\n    ],\r\n    \"detail\": \"stitch test\" // New Req\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/customer/request/createcustomerrequest",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "request",
+                    "createcustomerrequest"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "c_findcustomerrequest",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"customerId\":\"9876543210987\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/customer/findcustomerrequest",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "findcustomerrequest"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "c_find Doc From Request",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"customerId\":\"9876543210987\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/customer/finddocfromrequest",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "finddocfromrequest"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "c_findrequesttopic",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"customerId\":\"9876543210987\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/customer/findrequesttopic",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "findrequesttopic"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "c_finddocument",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerId\":\"9876543210987\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/customer/finddocument",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "customer",
+                "finddocument"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "c_finddocument Copy",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerId\":\"9876543210987\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/customer/finddocument",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "customer",
+                "finddocument"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "c_findcustomerprofile",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerId\":\"9876543210987\"\r\n    // \"customerId\":\"U1001\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/customer/findcustomerprofile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "customer",
+                "findcustomerprofile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find Notificationto Customer",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerId\":\"9876543210987\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/customer/findnotificationtocustomer",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "customer",
+                "findnotificationtocustomer"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "login local",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);\r",
+                  "postman.setEnvironmentVariable(\"refreshToken\", jsonData.refreshToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"user1@mail.com\",\r\n    \"pwd\":\"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/local/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "local",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login refresh",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);\r",
+                  "postman.setEnvironmentVariable(\"refreshToken\", jsonData.refreshToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refreshToken\":\"rt_GlPVe0rhaw1BC6Eoy8APKmTWmZQVDsDkAw9IhCpRacI\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/refresh",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login revoke",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);\r",
+                  "postman.setEnvironmentVariable(\"refreshToken\", jsonData.refreshToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refreshToken\":\"rt_GlPVe0rhaw1BC6Eoy8APKmTWmZQVDsDkAw9IhCpRacI\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/revoke",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "revoke"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "S3",
+      "item": [
+        {
+          "name": "S3 getObject",
+          "request": {
+            "auth": {
+              "type": "jwt",
+              "jwt": [
+                {
+                  "key": "isSecretBase64Encoded",
+                  "value": false,
+                  "type": "boolean"
+                },
+                {
+                  "key": "secret",
+                  "value": "Stitch",
+                  "type": "string"
+                },
+                {
+                  "key": "algorithm",
+                  "value": "HS256",
+                  "type": "string"
+                },
+                {
+                  "key": "payload",
+                  "value": "{}",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "headerPrefix",
+                  "value": "Bearer",
+                  "type": "string"
+                },
+                {
+                  "key": "queryParamKey",
+                  "value": "token",
+                  "type": "string"
+                },
+                {
+                  "key": "header",
+                  "value": "{}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fileKey\":\"document/CUSTOMER/9876543210987/FileTest.pdf\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/s3/getobject",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "s3",
+                "getobject"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "S3 putObject",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "3715b52e-d374-4ebe-b7b9-2f87fe2f77c3",
+                  "src": [
+                    "/C:/Users/kittichet_adu.FREEWILLGROUP/Desktop/icon.png.jpg",
+                    "/C:/Users/kittichet_adu.FREEWILLGROUP/Desktop/unnamed (1).jpg"
+                  ]
+                },
+                {
+                  "key": "fileKey",
+                  "value": "document/test",
+                  "type": "text",
+                  "uuid": "f3435f6a-8726-4621-88de-ac55238ba797"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/s3/putobject",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "s3",
+                "putobject"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "S3 importcsv",
+          "request": {
+            "auth": {
+              "type": "jwt",
+              "jwt": [
+                {
+                  "key": "isSecretBase64Encoded",
+                  "value": false,
+                  "type": "boolean"
+                },
+                {
+                  "key": "secret",
+                  "value": "Stitch",
+                  "type": "string"
+                },
+                {
+                  "key": "algorithm",
+                  "value": "HS256",
+                  "type": "string"
+                },
+                {
+                  "key": "payload",
+                  "value": "{}",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "headerPrefix",
+                  "value": "Bearer",
+                  "type": "string"
+                },
+                {
+                  "key": "queryParamKey",
+                  "value": "token",
+                  "type": "string"
+                },
+                {
+                  "key": "header",
+                  "value": "{}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fileKey\": \"results.csv\",\r\n  \"tableName\": \"justkept-dev\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/s3/importcsv",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "s3",
+                "importcsv"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Broker",
+      "item": [
+        {
+          "name": "findSchedules",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"brokerId\":\"0105566000888\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/broker/findschedules",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "broker",
+                "findschedules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "findallcustomerbybrokerid",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"brokerId\": \"U1001\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/broker/findallcustomerbybrokerid",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "broker",
+                "findallcustomerbybrokerid"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "findallrequested",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"brokerId\": \"U1001\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/broker/findallrequested",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "broker",
+                "findallrequested"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notification",
+      "item": [
+        {
+          "name": "Send Firebase Noti",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerId\": \"9876543210987\",\r\n    \"message\": \"test\",\r\n    \"notiChannel\": \"On Web\",\r\n    \"status\": \"SENT\",\r\n    \"title\": \"type\",\r\n    \"metadata\": {}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/notification/create",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "notification",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

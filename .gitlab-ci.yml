@@ -3,8 +3,7 @@ image: mcr.microsoft.com/playwright:v1.58.2-jammy # Use matching playwright vers
 
   
 stages:
-  - playwright-test
-  - playwright-upload
+  - test
 # ── Global pipeline variables (override in GitLab CI/CD Settings → Variables
 #    or via UI when running pipeline manually) ──────────────────────
 variables:
@@ -19,14 +18,7 @@ variables:
       - "data/ua"
       - "data/ardee"
       - "data/ezwow"
-      - "data/justkept"
     description: "Project folder in data directory"
-  MAIN_PRODUCT_DASHBOARD: 
-    value: "z-Test"
-    description: "Main product for dashboard"
-  SUB_PRODUCT_DASHBOARD: 
-    value: "playwright-test"
-    description: "Sub product for dashboard"
 
 # Default settings for all jobs
 default:
@@ -37,54 +29,23 @@ default:
     policy: pull-push
 
 # Job: Run Tests (project ถูกเลือกด้วย TEST_DATA_DIR ที่รับมาจาก trigger)
-playwright-test:
+test:
   tags: 
     - docker
-  stage: playwright-test
-  interruptible: true
+  stage: test
   script:
-    - echo "=== Pipeline Variables ==="
-    - echo "BASE_URL=${BASE_URL}"
-    - echo "TEST_DATA_DIR=${TEST_DATA_DIR}"
-    - echo "MAIN_PRODUCT=${MAIN_PRODUCT_DASHBOARD}"
-    - echo "SUB_PRODUCT=${SUB_PRODUCT_DASHBOARD}"
-    - echo "CI_PIPELINE_SOURCE=${CI_PIPELINE_SOURCE}"
-    - echo "=========================="
     - npm ci
     - npm test || true
   artifacts:
     when: always
     paths:
       - test-results/
-    reports:
-      junit: test-results/results.xml
     expire_in: 2 hours
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline"' # triggered จาก project อื่น (ส่ง TEST_DATA_DIR มาเอง)
     - if: '$CI_PIPELINE_SOURCE == "web"'       # Manual run จาก GitLab UI
       when: manual
     - changes:                                 # push ที่มีการเปลี่ยนแปลง test/data
-        - test/**/*
-        - data/**/*
-
-# Job: Upload Test Results
-playwright-upload:
-  tags: 
-    - docker
-  stage: playwright-upload
-  interruptible: true
-  script:
-    - echo "=== Upload Variables ==="
-    - echo "MAIN_PRODUCT=${MAIN_PRODUCT_DASHBOARD}"
-    - echo "SUB_PRODUCT=${SUB_PRODUCT_DASHBOARD}"
-    - echo "========================"
-    - bash script/upload_file_result.sh || true
-  needs:
-    - playwright-test
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "pipeline"'
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-    - changes:
         - test/**/*
         - data/**/*
 

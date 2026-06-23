@@ -1,0 +1,687 @@
+{
+  "info": {
+    "_postman_id": "872327d5-d084-4a21-9610-1b15eba3fc68",
+    "name": "Justkept Dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46466718"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "/api/auth/local/login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"user1@mail.com\",\r\n    \"pwd\":\"1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{cloudfront_url}}/api/auth/local/login",
+              "host": [
+                "{{cloudfront_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "local",
+                "login"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://viurqx6a8i.execute-api.ap-southeast-1.amazonaws.com/api/auth/local/login' \\\r\n--header 'Content-Type: application/json' \\\r\n--data-raw '{\r\n    \"username\":\"user1@mail.com\",\r\n    \"pwd\":\"1\"\r\n}'"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Broker",
+      "item": [
+        {
+          "name": "Document Service",
+          "item": [
+            {
+              "name": "/api/broker/listuploaddraft",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"brokerId\": \"U1001\",\r\n    \"requestId\": \"REQ404\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/listuploaddraft",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "listuploaddraft"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/api/broker/deletedocumentdraft",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"brokerId\": \"12345678910\",\r\n    \"draftSK\": \"DRAFT_DOC#2026-03-24T06:20:31.353Z#DRAFT-3BC5BCDF\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/deletedocumentdraft",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "deletedocumentdraft"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/api/broker/createdocumentdraft",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"PK\": \"BROKER#CID200002\",\r\n  \"SK\": \"DRAFT_DOC#2026-03-22T02:01:00Z#DOC005\",\r\n  \"entity\": \"doc_draft\",\r\n  \"requestId\": \"REQ005\",\r\n  \"customerId\": \"CID20002\",\r\n  \"draftId\": \"DOC005\",\r\n  \"docType\": \"REPORT\",\r\n  \"fileName\": \"REPORT_202605.pdf\",\r\n  \"filePath\": \"\",\r\n  \"storageClass\": \"Standard\",\r\n  \"fileSize\": 210000,\r\n  \"privacy\": \"Private\",\r\n  \"isDownload\": true\r\n}\r\n\r\n// {\r\n//   \"PK\": \"BROKER#CID200002\",\r\n//   \"SK\": \"DRAFT_DOC#2026-03-01T10:00:00Z#DOC004\",\r\n//   \"entity\": \"system_schedule_job\",\r\n//   \"requestId\": \"REQ004\",\r\n//   \"customerId\": \"CID200002\",\r\n//   \"draftId\": \"DOC004\",\r\n//   \"docType\": \"REPORT\",\r\n//   \"fileName\": \"REPORT_202603.pdf\",\r\n//   \"filePath\": \"s3://justkept/report/REPORT_202603.pdf\",\r\n//   \"storageClass\": \"Standard\",\r\n//   \"fileSize\": 150000,\r\n//   \"privacy\": \"Private\",\r\n//   \"isDownload\": false,\r\n//   \"createdAt\": \"2026-03-01T10:00:00Z\",\r\n//   \"updatedAt\": \"2026-03-01T10:00:00Z\",\r\n//   \"expireAt\": \"\"\r\n// }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/createdocumentdraft",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "createdocumentdraft"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/api/broker/brokerfulfillotherformcase",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "brokerId",
+                      "value": "12345678910",
+                      "type": "text",
+                      "uuid": "8ddc2265-d64b-4b71-aa9e-0cbe868a88b8"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "9876543210987",
+                      "type": "text",
+                      "uuid": "a6719c2a-8a05-4cf8-ae8e-a028ae14f122"
+                    },
+                    {
+                      "key": "requestId",
+                      "value": "REQ-NEW-003",
+                      "type": "text",
+                      "uuid": "0c19eaa0-c655-4f2a-b3be-c29aac2e6a40"
+                    },
+                    {
+                      "key": "docType",
+                      "value": "STATEMENT",
+                      "type": "text",
+                      "uuid": "7a629868-6f52-4561-baf6-b4974e9c7309"
+                    },
+                    {
+                      "key": "",
+                      "type": "file",
+                      "uuid": "59359a59-d3bf-4cc8-8de4-762be0cfd357",
+                      "src": [
+                        "/C:/Users/purin_pee.FREEWILLGROUP/Downloads/sample-5.pdf",
+                        "/C:/Users/purin_pee.FREEWILLGROUP/Downloads/sample-4.pdf",
+                        "/C:/Users/purin_pee.FREEWILLGROUP/Downloads/sample-3.pdf",
+                        "/C:/Users/purin_pee.FREEWILLGROUP/Downloads/sample-2.pdf",
+                        "/C:/Users/purin_pee.FREEWILLGROUP/Downloads/sample-1.pdf"
+                      ]
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/brokerfulfillotherformcase",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "brokerfulfillotherformcase"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/api/broker/findallrequested",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"brokerId\": \"U1001\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/findallrequested",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "findallrequested"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/api/broker/findrequestbyrequestid",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"customerId\": \"9876543210987\",\r\n  \"requestId\": \"2f70d0ec-f6f1-4ffb-aca3-fc93ea50749e\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/document/findrequestbyrequestid",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "document",
+                    "findrequestbyrequestid"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Schedule Service",
+          "item": [
+            {
+              "name": "/api/broker/findschedules",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"brokerId\": \"0105566000888\",\r\n    // \"status\": \"In Progress\",\r\n    // \"subject\": \"test\"\r\n    \"createdAt\": \"2026-01-15\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/findschedules",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "findschedules"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/api/broker/listscheduledraft",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"brokerId\": \"0105566000888\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/listscheduledraft",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "listscheduledraft"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Audit Service",
+          "item": [
+            {
+              "name": "/api/audit/findauditlogs (Not exist)",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"actorId\": \"9876543210987\",\r\n  \"actorRole\": \"CUSTOMER\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/audit/findauditlogs",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "audit",
+                    "findauditlogs"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Customer's Logs Service",
+          "item": [
+            {
+              "name": "/api/broker/customerlogs",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"customerId\": \"9876543210987\"\r\n//   \"action\": \"Viewed\",\r\n//   \"startDate\": \"2026-03-01\",\r\n//   \"endDate\": \"2026-03-31\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/customerlogs",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "customerlogs"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/api/broker/findallcustomerbysubcomid",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"brokerId\": \"12345678910\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{cloudfront_url}}/api/broker/findallcustomerbysubcomid",
+                  "host": [
+                    "{{cloudfront_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "broker",
+                    "findallcustomerbysubcomid"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "As Request",
+          "item": [
+            {
+              "name": "/api/customer/request/createcustomerrequest",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Cookie",
+                    "value": "refreshToken=rt_j9VGXnK3yU78yUwPrb-4dCZvxd3qmtkJUqQTZtrfVVU"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": " {\r\n        // \"PK\": \"CUSTOMER#9876543210987\",\r\n        \"specifyDocType\": \"Annual Summary Report\",\r\n        \"filter\": {\r\n            \"year\": \"2029\",\r\n            \"startDate\": \"\",\r\n            \"endDate\": \"\"\r\n        }, //optional\r\n        // \"SK\": \"REQ#2026-03-11T10:00:00Z\", //REQ#System stamptime\r\n        // \"entity\": \"customer_req\", //defult : customer_req\r\n        // \"requestId\": \"REQ001\", //auto gen uuid\r\n        // \"docId\": \"DOC001\", //auto gen uuid\r\n        \"customerId\": \"9876543210987\",\r\n        \"customerName\": \"Somchai Sukjai\",\r\n        \"customerEmail\": \"somchai@example.com\"\r\n        // \"requestType\": \"File Exists\", //defult : File Exists\r\n        // \"status\": \"Completed\" //defult : Completed\r\n        // \"createdAt\": \"2026-03-11T10:00:00Z\" // System stamptime\r\n    }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://viurqx6a8i.execute-api.ap-southeast-1.amazonaws.com/api/customer/request/createcustomerrequest",
+                  "protocol": "https",
+                  "host": [
+                    "viurqx6a8i",
+                    "execute-api",
+                    "ap-southeast-1",
+                    "amazonaws",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "customer",
+                    "request",
+                    "createcustomerrequest"
+                  ]
+                },
+                "description": "Generated from cURL: curl --location 'https://viurqx6a8i.execute-api.ap-southeast-1.amazonaws.com/api/customer/request/createcustomerrequest' \\\r\n--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjE4NzNjMmI4LWI4YTItNDU5NS1iNzM0LWQxNGQxNTRiZGYwNCJ9.eyJ1c2VyX2lkIjoiVTEwMDEiLCJ0ZW5hbnRfaWQiOiJUMDAxIiwiY29tcGFueV9pZCI6IkMwMDEiLCJyb2xlcyI6WyJhZG1pbiIsImFwcHJvdmVyIl0sInBlcm1pc3Npb25zIjpbWyJhZG1pbjptYW5hZ2UiLCJjb25maWc6ZWRpdCIsImZpbGU6ZGVsZXRlIiwiZmlsZTpyZWFkIiwiZmlsZTp1cGxvYWQiLCJ1c2VyOmNyZWF0ZSIsInVzZXI6ZGVsZXRlIiwidXNlcjp1cGRhdGUiXSxbImZpbGU6ZGVsZXRlIiwiZmlsZTpyZWFkIiwiZmlsZTp1cGxvYWQiLCJ1c2VyOmNyZWF0ZSIsInVzZXI6ZGVsZXRlIiwidXNlcjphcHByb3ZlIl1dLCJhdXRoVHlwZSI6IkxPQ0FMIiwicHJvdmlkZXIiOiJQQVNTV09SRCIsImlhdCI6MTc3NDU3OTExNCwiZXhwIjoxNzc0NTgwMDE0LCJpc3MiOiJhdXRoLXNlcnZpY2UiLCJhdWQiOiJjb3JlLWFwaSJ9.Xwt0LhJBcUvsERzDBex2toYjWGrVaxF8HKUy_s5nM6LYrfmWziExbwy93NFKQ6c6u0Y_BhowutXjaEaDqIgr5uFyZqeMKSkbqTbm20EwPj15cGLE93TLSCsfIzMrnBSWTJf8VAk5hBeaVGyFz-P-UuudVZuV_x8Yh5cmeDFeMEzfVIaX5lpEGdoQ0zeCwlkxtSyozadf0Aj3lOgjxEzO3C0hvXx7CaBYpm1ZqZEd9ZpR2TJxs1jrX2EWdsNMQHDxbyZtiqytCthLWnrmWKO9XeLIKLat70mxC7t6uQ3WFCMMGIt7HczfG5eNS5rp37cPwXlSxwUBvCIw3davS96xaQ' \\\r\n--header 'Content-Type: application/json' \\\r\n--header 'Cookie: refreshToken=rt_j9VGXnK3yU78yUwPrb-4dCZvxd3qmtkJUqQTZtrfVVU' \\\r\n--data-raw '\r\n    {\r\n        \r\n        \"specifyDocType\": \"Annual Summary Report\",\r\n        \"filter\": {\r\n            \"year\": \"2029\",\r\n            \"startDate\": \"\",\r\n            \"endDate\": \"\"\r\n        }, \r\n        \r\n        \r\n        \r\n        \r\n        \"customerId\": \"9876543210987\",\r\n        \"customerName\": \"Somchai Sukjai\",\r\n        \"customerEmail\": \"somchai@example.com\"\r\n        \r\n        \r\n        \r\n    }\r\n    \r\n'"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "S3",
+      "item": [
+        {
+          "name": "put",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZmNzk1MjhlLTFmZjEtNGY1Mi1hYzUyLTlkNjRlMzRhZWM1ZiJ9.eyJ1c2VyX2lkIjoiVTEwMDEiLCJ0ZW5hbnRfaWQiOiJUMDAxIiwiY29tcGFueV9pZCI6IkMwMDEiLCJyb2xlcyI6WyJicm9rZXIiXSwicGVybWlzc2lvbnMiOlsiYWRtaW46bWFuYWdlIiwiY29uZmlnOmVkaXQiLCJmaWxlOmRlbGV0ZSIsImZpbGU6cmVhZCIsImZpbGU6dXBsb2FkIiwiYWRtaTpjcmVhdGUiLCJ1c2VyOmRlbGV0ZSIsInVzZXI6dXBkYXRlIl0sIndpbGRjYXJkcyI6WyJmaWxlOioiLCJ1c2VyOioiLCJhZG1pbjoqIl0sImF1dGhUeXBlIjoiTE9DQUwiLCJwcm92aWRlciI6IlBBU1NXT1JEIiwiaWF0IjoxNzc4NjQ5MDg3LCJleHAiOjE3Nzg2NDk5ODcsImlzcyI6Imh0dHBzOi8vZDJrc2ppY3hmeDl4cXIuY2xvdWRmcm9udC5uZXQiLCJhdWQiOiJjb3JlLWFwaSJ9.jk-s9k3k0oosRQ80nfINENEsAO-oNRDtJQcQvB1ypGdlsO8O53Gyim9yhSnntydXNF1g_2nn47qIrG0buDtSgz0-0TriL3daEpTFtd08z0Z-w0-cDPbxnTwl7hC8eqGHcoWfqRjxm7Om-jHFmi-Zar-_PqjntLFOzXbFMXccVrV8JNQPb9Er-SQCIHgpC0TuQyqXRHkUaRJXUoQDChJy0nTZyni16niExrXhR-3kTM-oCEiwjpM1RLXFioNtEx9VOKzG1imcG7MSbk0bOhgPOXnEJQCz2sjSIlIue-0Nhmjaerc-oLuG_EHnsqxuJ_JKtxJ_ASFW25V88j7cK9nn3Q"
+              },
+              {
+                "key": "Cookie",
+                "value": "refreshToken=rt_Wh7HLC_Je28_lYfBPiP3mcybPh41no5Sk8_Vq7U20EA"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "type": "file",
+                  "key": "file",
+                  "src": "/path/to/file"
+                },
+                {
+                  "type": "text",
+                  "key": "fileKey",
+                  "value": "document/test"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://s2920ozmai.execute-api.ap-southeast-1.amazonaws.com/api/s3/putobject",
+              "protocol": "https",
+              "host": [
+                "s2920ozmai",
+                "execute-api",
+                "ap-southeast-1",
+                "amazonaws",
+                "com"
+              ],
+              "path": [
+                "api",
+                "s3",
+                "putobject"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://s2920ozmai.execute-api.ap-southeast-1.amazonaws.com/api/s3/putobject' \\\n--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZmNzk1MjhlLTFmZjEtNGY1Mi1hYzUyLTlkNjRlMzRhZWM1ZiJ9.eyJ1c2VyX2lkIjoiVTEwMDEiLCJ0ZW5hbnRfaWQiOiJUMDAxIiwiY29tcGFueV9pZCI6IkMwMDEiLCJyb2xlcyI6WyJicm9rZXIiXSwicGVybWlzc2lvbnMiOlsiYWRtaW46bWFuYWdlIiwiY29uZmlnOmVkaXQiLCJmaWxlOmRlbGV0ZSIsImZpbGU6cmVhZCIsImZpbGU6dXBsb2FkIiwiYWRtaTpjcmVhdGUiLCJ1c2VyOmRlbGV0ZSIsInVzZXI6dXBkYXRlIl0sIndpbGRjYXJkcyI6WyJmaWxlOioiLCJ1c2VyOioiLCJhZG1pbjoqIl0sImF1dGhUeXBlIjoiTE9DQUwiLCJwcm92aWRlciI6IlBBU1NXT1JEIiwiaWF0IjoxNzc4NjQ5MDg3LCJleHAiOjE3Nzg2NDk5ODcsImlzcyI6Imh0dHBzOi8vZDJrc2ppY3hmeDl4cXIuY2xvdWRmcm9udC5uZXQiLCJhdWQiOiJjb3JlLWFwaSJ9.jk-s9k3k0oosRQ80nfINENEsAO-oNRDtJQcQvB1ypGdlsO8O53Gyim9yhSnntydXNF1g_2nn47qIrG0buDtSgz0-0TriL3daEpTFtd08z0Z-w0-cDPbxnTwl7hC8eqGHcoWfqRjxm7Om-jHFmi-Zar-_PqjntLFOzXbFMXccVrV8JNQPb9Er-SQCIHgpC0TuQyqXRHkUaRJXUoQDChJy0nTZyni16niExrXhR-3kTM-oCEiwjpM1RLXFioNtEx9VOKzG1imcG7MSbk0bOhgPOXnEJQCz2sjSIlIue-0Nhmjaerc-oLuG_EHnsqxuJ_JKtxJ_ASFW25V88j7cK9nn3Q' \\\n--header 'Cookie: refreshToken=rt_Wh7HLC_Je28_lYfBPiP3mcybPh41no5Sk8_Vq7U20EA' \\\n--form 'file=@\"/path/to/file\"' \\\n--form 'fileKey=\"document/test\"'"
+          },
+          "response": []
+        },
+        {
+          "name": "get",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZmNzk1MjhlLTFmZjEtNGY1Mi1hYzUyLTlkNjRlMzRhZWM1ZiJ9.eyJ1c2VyX2lkIjoiVTEwMDEiLCJ0ZW5hbnRfaWQiOiJUMDAxIiwiY29tcGFueV9pZCI6IkMwMDEiLCJyb2xlcyI6WyJicm9rZXIiXSwicGVybWlzc2lvbnMiOlsiYWRtaW46bWFuYWdlIiwiY29uZmlnOmVkaXQiLCJmaWxlOmRlbGV0ZSIsImZpbGU6cmVhZCIsImZpbGU6dXBsb2FkIiwiYWRtaTpjcmVhdGUiLCJ1c2VyOmRlbGV0ZSIsInVzZXI6dXBkYXRlIl0sIndpbGRjYXJkcyI6WyJmaWxlOioiLCJ1c2VyOioiLCJhZG1pbjoqIl0sImF1dGhUeXBlIjoiTE9DQUwiLCJwcm92aWRlciI6IlBBU1NXT1JEIiwiaWF0IjoxNzc4NjQ5MDg3LCJleHAiOjE3Nzg2NDk5ODcsImlzcyI6Imh0dHBzOi8vZDJrc2ppY3hmeDl4cXIuY2xvdWRmcm9udC5uZXQiLCJhdWQiOiJjb3JlLWFwaSJ9.jk-s9k3k0oosRQ80nfINENEsAO-oNRDtJQcQvB1ypGdlsO8O53Gyim9yhSnntydXNF1g_2nn47qIrG0buDtSgz0-0TriL3daEpTFtd08z0Z-w0-cDPbxnTwl7hC8eqGHcoWfqRjxm7Om-jHFmi-Zar-_PqjntLFOzXbFMXccVrV8JNQPb9Er-SQCIHgpC0TuQyqXRHkUaRJXUoQDChJy0nTZyni16niExrXhR-3kTM-oCEiwjpM1RLXFioNtEx9VOKzG1imcG7MSbk0bOhgPOXnEJQCz2sjSIlIue-0Nhmjaerc-oLuG_EHnsqxuJ_JKtxJ_ASFW25V88j7cK9nn3Q"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "refreshToken=rt_Wh7HLC_Je28_lYfBPiP3mcybPh41no5Sk8_Vq7U20EA"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fileKey\":\"document/CUSTOMER/9876543210987/basic-text.pdf\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://s2920ozmai.execute-api.ap-southeast-1.amazonaws.com/api/s3/getobject",
+              "protocol": "https",
+              "host": [
+                "s2920ozmai",
+                "execute-api",
+                "ap-southeast-1",
+                "amazonaws",
+                "com"
+              ],
+              "path": [
+                "api",
+                "s3",
+                "getobject"
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'https://s2920ozmai.execute-api.ap-southeast-1.amazonaws.com/api/s3/getobject' \\\n--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZmNzk1MjhlLTFmZjEtNGY1Mi1hYzUyLTlkNjRlMzRhZWM1ZiJ9.eyJ1c2VyX2lkIjoiVTEwMDEiLCJ0ZW5hbnRfaWQiOiJUMDAxIiwiY29tcGFueV9pZCI6IkMwMDEiLCJyb2xlcyI6WyJicm9rZXIiXSwicGVybWlzc2lvbnMiOlsiYWRtaW46bWFuYWdlIiwiY29uZmlnOmVkaXQiLCJmaWxlOmRlbGV0ZSIsImZpbGU6cmVhZCIsImZpbGU6dXBsb2FkIiwiYWRtaTpjcmVhdGUiLCJ1c2VyOmRlbGV0ZSIsInVzZXI6dXBkYXRlIl0sIndpbGRjYXJkcyI6WyJmaWxlOioiLCJ1c2VyOioiLCJhZG1pbjoqIl0sImF1dGhUeXBlIjoiTE9DQUwiLCJwcm92aWRlciI6IlBBU1NXT1JEIiwiaWF0IjoxNzc4NjQ5MDg3LCJleHAiOjE3Nzg2NDk5ODcsImlzcyI6Imh0dHBzOi8vZDJrc2ppY3hmeDl4cXIuY2xvdWRmcm9udC5uZXQiLCJhdWQiOiJjb3JlLWFwaSJ9.jk-s9k3k0oosRQ80nfINENEsAO-oNRDtJQcQvB1ypGdlsO8O53Gyim9yhSnntydXNF1g_2nn47qIrG0buDtSgz0-0TriL3daEpTFtd08z0Z-w0-cDPbxnTwl7hC8eqGHcoWfqRjxm7Om-jHFmi-Zar-_PqjntLFOzXbFMXccVrV8JNQPb9Er-SQCIHgpC0TuQyqXRHkUaRJXUoQDChJy0nTZyni16niExrXhR-3kTM-oCEiwjpM1RLXFioNtEx9VOKzG1imcG7MSbk0bOhgPOXnEJQCz2sjSIlIue-0Nhmjaerc-oLuG_EHnsqxuJ_JKtxJ_ASFW25V88j7cK9nn3Q' \\\n--header 'Content-Type: application/json' \\\n--header 'Cookie: refreshToken=rt_Wh7HLC_Je28_lYfBPiP3mcybPh41no5Sk8_Vq7U20EA' \\\n--data '{\n    \"fileKey\":\"document/CUSTOMER/9876543210987/basic-text.pdf\"\n}'"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import { executeStep } from './utils/keywordMapper';
 import { injectVariables } from './utils/variableInjector';
 
 // Use environment variable for test data directory, with a default fallback
-const testDataDir = process.env.TEST_DATA_DIR || path.join(process.cwd(), 'data/prprocess');
+const testDataDir = process.env.TEST_DATA_DIR || path.join(process.cwd(), 'data/JustKept');
 const outputDir = 'test-results/screenshots';
 
 // Ensure the directory exists before readdir

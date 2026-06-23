@@ -23,6 +23,9 @@
  * └────────────────────┴───────────────────────────────────────────────────────────┘
  */
 
+import fs from 'fs';
+import path from 'path';
+
 // ─── Module-level state ────────────────────────────────────────────────────────
 let _baseUrl = '';
 let _headers = {};
@@ -245,6 +248,40 @@ export const apiKeywords = {
     const maxLen = parseInt(target, 10) || 1000;
     const preview = (_lastResponseText ?? '').substring(0, maxLen);
     console.log(`  📄 Response [${_lastResponse.status()}]:\n${preview}`);
+  },
+
+  /**
+   * API_UPLOAD: ส่งไฟล์และข้อมูล (Multipart Form Data)
+   * Target: path ของ API เช่น /api/cust_doc-upload/submit
+   * Data:   JSON string ระบุพารามิเตอร์อื่นๆ และฟิลด์ file/document เช่น {"customerId":"...", "file":"data/sample.pdf"}
+   */
+  API_UPLOAD: async (request, target, data) => {
+    const url = resolveUrl(target);
+    const params = parseBody(data);
+    const multipart = {};
+    for (const [key, val] of Object.entries(params || {})) {
+      if (key === 'file' || key === 'document') {
+        const filePath = path.resolve(process.cwd(), val);
+        if (fs.existsSync(filePath)) {
+          multipart[key] = fs.createReadStream(filePath);
+        } else {
+          // หากไม่มีไฟล์จริง ส่ง dummy buffer เพื่อลดการพัง
+          multipart[key] = {
+            name: path.basename(filePath),
+            mimeType: 'application/pdf',
+            buffer: Buffer.from('dummy pdf content')
+          };
+        }
+      } else {
+        multipart[key] = String(val);
+      }
+    }
+    _lastResponse = await request.post(url, {
+      headers: _headers,
+      multipart: multipart,
+    });
+    await cacheResponse();
+    console.log(`  ➡️  UPLOAD [${url}] → ${_lastResponse.status()} ${_lastResponse.statusText()}`);
   },
 };
 

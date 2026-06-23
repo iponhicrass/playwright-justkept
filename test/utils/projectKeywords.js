@@ -8,11 +8,11 @@ export const projectKeywords = {
   },
 
   CLICK_FLT: async (page, target, data) => {
-    await page.locator(`[flt-semantics-identifier="${target}"], [id="${target}"]`).click({ force: data === 'force' });
+    await page.locator(`flt-semantics[flt-semantics-identifier="${target}"]`).click({ force: data === 'force' });
   },
 
   SELECT_FLT: async (page, target, data) => {
-    const ddLocator = page.locator(`[flt-semantics-identifier="${target}"], [id="${target}"]`);
+    const ddLocator = page.locator(`flt-semantics[flt-semantics-identifier="${target}"]`);
     await ddLocator.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
     await ddLocator.click({ force: true });
@@ -152,7 +152,7 @@ export const projectKeywords = {
   },
 
   SCROLL_TO_FLT: async (page, target) => {
-    await page.locator(`[flt-semantics-identifier="${target}"], [id="${target}"]`).scrollIntoViewIfNeeded();
+    await page.locator(`flt-semantics[flt-semantics-identifier="${target}"]`).scrollIntoViewIfNeeded();
   },
 
   WAIT_RACE_SUCCESS: async (page) => {
