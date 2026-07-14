@@ -3,8 +3,63 @@
  * Project-specific keywords for prprocess (mostly Flutter-related).
  */
 export const projectKeywords = {
-  LOGIN: async (page, target, data) => {
-    await login(page, target || undefined, data || undefined);
+  LOGIN_BROKER: async (page) => {
+    await page.goto('https://justkept-dev.freewillsolutions.com/user-login');
+    const emailLoc = page.getByPlaceholder('Enter your email').or(page.locator('input').first());
+    await emailLoc.waitFor({ state: 'visible', timeout: 10000 });
+    await emailLoc.fill('user1@mail.com');
+    
+    const passLoc = page.locator('input[type="password"]').first();
+    await passLoc.fill('1');
+    
+    const btnLoc = page.getByRole('button', { name: /Sign In/i }).first();
+    await btnLoc.click();
+    
+    await page.waitForTimeout(3000); // wait for redirect
+  },
+
+  LOGIN_CUSTOMER: async (page) => {
+    await page.goto('https://justkept-dev.freewillsolutions.com/user-login');
+    const emailLoc = page.getByPlaceholder('Enter your email').or(page.locator('input').first());
+    await emailLoc.waitFor({ state: 'visible', timeout: 10000 });
+    await emailLoc.fill('user2@mail.com');
+    
+    const passLoc = page.locator('input[type="password"]').first();
+    await passLoc.fill('1');
+    
+    const btnLoc = page.getByRole('button', { name: /Sign In/i }).first();
+    await btnLoc.click();
+    
+    await page.waitForTimeout(3000); // wait for redirect
+  },
+
+  ROUTE_MOCK: async (page, target, data) => {
+    // Target is the URL pattern to intercept, Data is the JSON string to return
+    await page.route(target, async route => {
+      let bodyData = {};
+      try {
+        bodyData = JSON.parse(data);
+      } catch (e) {
+        bodyData = data;
+      }
+      const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': '*'
+      };
+
+      if (route.request().method() === 'OPTIONS') {
+        await route.fulfill({ status: 204, headers });
+        return;
+      }
+
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        headers,
+        body: typeof bodyData === 'string' ? bodyData : JSON.stringify(bodyData)
+      });
+    });
   },
 
   CLICK_FLT: async (page, target, data) => {
@@ -114,6 +169,12 @@ export const projectKeywords = {
 
     await page.getByRole('button', { name: 'OK' }).first().click({ force: true });
     await page.waitForTimeout(500);
+  },
+
+  DOUBLE_CLICK: async (page, target, data) => {
+    const loc = page.locator(target).first();
+    await loc.dblclick({ force: true, delay: 50 });
+    console.log(`✅ Double-clicked on ${target}`);
   },
 
   BYPASS_TURNSTILE: async (page, target, data) => {

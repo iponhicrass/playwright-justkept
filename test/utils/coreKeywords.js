@@ -114,6 +114,14 @@ export const coreKeywords = {
     await page.waitForTimeout(1000); // รอให้ UI แสดงผลชื่อไฟล์สักนิด
   },
 
+  SELECT_OPTION: async (page, target, data) => {
+    const selectLoc = page.locator(target).first();
+    await selectLoc.scrollIntoViewIfNeeded();
+    await selectLoc.selectOption(data);
+    await page.waitForTimeout(500);
+  },
+
+
 
   LOG: async (page, target, data) => {
     console.log(data);
@@ -265,6 +273,17 @@ export const coreKeywords = {
           : page.getByRole(roleName);
         isFound = await locatorArgs.first().isVisible({ timeout: TIMEOUT }).catch(() => false);
 
+      } else if (mode === 'checked') {
+        // เช็คสถานะ isChecked ของ checkbox หรือ radio
+        isFound = await page.locator(selector).first().isChecked({ timeout: TIMEOUT }).catch(() => false);
+
+      } else if (mode === 'radio_value') {
+        // เช็คว่า radio group (ระบุด้วย name) มีตัวเลือกไหนถูกเลือกอยู่
+        // format: "radio_value|name=expectedValue"
+        const [radioName, expectedVal] = selector.split('=');
+        actualValue = await page.locator(`input[type="radio"][name="${radioName}"]:checked`).inputValue().catch(() => 'none');
+        isFound = actualValue === expectedVal;
+
       } else if (mode === 'locator') {
         // CSS / XPath selector ทั่วไป
         isFound = await page.locator(selector).first().isVisible({ timeout: TIMEOUT }).catch(() => false);
@@ -288,9 +307,14 @@ export const coreKeywords = {
     // ─── Evaluate pass/fail ───────────────────────────────────────────────
     const valueInfo = actualValue !== null ? ` (actual="${actualValue}")` : '';
     const status = (expectPass && isFound) || (!expectPass && !isFound) ? '✅ PASS' : '❌ FAIL';
-    const foundMsg = mode === 'url'
-      ? (isFound ? 'url matched' : 'url not matched')
-      : (isFound ? 'found/visible' : 'not found/hidden');
+    let foundMsg;
+    if (mode === 'radio_value') {
+      foundMsg = actualValue;
+    } else if (mode === 'url') {
+      foundMsg = isFound ? 'url matched' : 'url not matched';
+    } else {
+      foundMsg = isFound ? 'found/visible' : 'not found/hidden';
+    }
     const expectMsg = expectPass ? 'expected: match/exist' : 'expected: not match/exist';
     const msg = `CHECK_RESULT [${mode}] "${selector}"${valueInfo} → ${status} | ${expectMsg}, actual: ${foundMsg}`;
 

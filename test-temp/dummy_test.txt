@@ -1,0 +1,1 @@
+Dummy content for UI testing file type validation.

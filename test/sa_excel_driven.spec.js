@@ -37,6 +37,11 @@ if (!fs.existsSync(testDataDir)) {
 
             test(testTitle, async ({ page }, testInfo) => {
               test.setTimeout(300000);
+              // Auto-dismiss dialogs (alerts, confirms) to prevent hanging
+              page.on('dialog', async dialog => {
+                console.log(`  💬 DIALOG: [${dialog.type()}] "${dialog.message()}" -> Auto-dismissed`);
+                await dialog.dismiss();
+              });
               console.log(`\n========== ${testTitle} ==========`);
               if (dataset) console.log('Data Injected:', JSON.stringify(dataset));
 

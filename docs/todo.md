@@ -59,6 +59,12 @@
 
 ---
 
+## 🐞 Known Defects / Tech Debt
+- **[BUG-001] TC_UI_13 (Job Edit)**: การเลือกสถานะ `NEXT_CYCLE` ไม่สามารถบันทึกค่าได้ (เมื่อบันทึกแล้วระบบจะเด้งกลับเป็น `IMMEDIATE`) 
+  - *Workaround in Test:* ใช้ `Data: "fail"` ในคำสั่ง `CHECK_RESULT` เพื่อ Bypass error สีแดงชั่วคราว จนกว่าฝั่ง Dev จะแก้ไขเสร็จ (ค่อยปรับกลับเป็น `Data: "pass"`)
+
+---
+
 ## 📝 Audit Log
 
 - **2026-03-24**: Initialized baseline project context structure. Gathered project requirements: testing prprocess customer case reception on Flutter Web at mspservice-uat.freewillgroup.com. (Requested by: @p-jack).
